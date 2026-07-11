@@ -1,0 +1,36 @@
+{
+    "antigoTestamento": [
+        {
+            "nome": "Rute",
+            "capitulos": [
+                {
+                    "capitulo": 1,
+                    "versiculos": [
+                        { "versiculo": 1, "texto": "Houve fome na terra nos dias em que os juízes governavam." },
+                        { "versiculo": 2, "texto": "O nome desse homem era Elimelec.*" }
+                    ]
+                },
+                {
+                    "capitulo": 2,
+                    "versiculos": [
+                        { "versiculo": 1, "texto": "Noemi tinha um parente de seu marido." }
+                    ]
+                }
+            ]
+        }
+    ],
+    "novoTestamento": [
+        {
+            "nome": "São Judas",
+            "capitulos": [
+                {
+                    "capitulo": 1,
+                    "versiculos": [
+                        { "versiculo": 1, "texto": "Judas, servo de Jesus Cristo e irmão de Tiago.*" },
+                        { "versiculo": 2, "texto": "Misericórdia, paz e caridade vos sejam multiplicadas." }
+                    ]
+                }
+            ]
+        }
+    ]
+}
