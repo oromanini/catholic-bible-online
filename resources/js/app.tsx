@@ -3,6 +3,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { initializeTheme } from '@/hooks/use-appearance';
 import { initializeReadingTheme } from '@/hooks/use-reading-theme';
+import { initializeTypeface } from '@/hooks/use-typeface';
 import AppLayout from '@/layouts/app-layout';
 import AuthLayout from '@/layouts/auth-layout';
 import BibleReaderLayout from '@/layouts/bible-reader-layout';
@@ -45,3 +46,6 @@ initializeTheme();
 
 // This will set the reading theme (light/sepia/dark) on load...
 initializeReadingTheme();
+
+// This will set the typeface (serif/sans) on load...
+initializeTypeface();

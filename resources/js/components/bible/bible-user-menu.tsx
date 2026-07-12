@@ -15,16 +15,16 @@ export default function BibleUserMenu() {
 
     if (!auth.user) {
         return (
-            <div className="flex items-center gap-3 text-sm">
+            <div className="ml-1 flex items-center gap-3 px-1 text-sm whitespace-nowrap">
                 <Link
                     href={login()}
-                    className="text-reading-muted hover:text-reading-fg"
+                    className="text-text-muted hover:text-text"
                 >
                     Entrar
                 </Link>
                 <Link
                     href={register()}
-                    className="rounded-lg border border-reading-muted/25 px-3 py-1.5 hover:bg-reading-muted/5"
+                    className="rounded-lg border border-surface-border px-3 py-1.5 text-text hover:bg-surface"
                 >
                     Criar conta
                 </Link>

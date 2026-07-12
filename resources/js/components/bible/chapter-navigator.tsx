@@ -24,7 +24,7 @@ export default function ChapterNavigator({
     );
 
     return (
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center justify-between gap-3 rounded-[14px] border border-surface-border bg-surface px-3.5 py-2.5">
             {navigation.prev ? (
                 <Link
                     href={bible.read({
@@ -32,7 +32,7 @@ export default function ChapterNavigator({
                         book: navigation.prev.book,
                         chapter: navigation.prev.chapter,
                     })}
-                    className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-reading-muted transition-all hover:bg-reading-muted/10 hover:text-reading-fg active:scale-95"
+                    className="flex items-center gap-1 rounded-lg px-2 py-1 text-[13.5px] font-bold text-text-muted transition-all hover:text-text active:scale-95"
                     aria-label="Capítulo anterior"
                 >
                     <ChevronLeft className="h-4 w-4" />
@@ -54,11 +54,11 @@ export default function ChapterNavigator({
                         }),
                     )
                 }
-                className="rounded-lg border border-reading-muted/20 bg-reading-bg px-2 py-1.5 text-sm text-reading-fg"
+                className="rounded-lg border-none bg-transparent px-2 py-1.5 text-[12.5px] font-bold text-accent-gold-text"
             >
                 {chapters.map((number) => (
                     <option key={number} value={number}>
-                        Capítulo {number}
+                        Capítulo {number} de {chapterCount}
                     </option>
                 ))}
             </select>
@@ -70,7 +70,7 @@ export default function ChapterNavigator({
                         book: navigation.next.book,
                         chapter: navigation.next.chapter,
                     })}
-                    className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm text-reading-muted transition-all hover:bg-reading-muted/10 hover:text-reading-fg active:scale-95"
+                    className="flex items-center gap-1 rounded-lg px-2 py-1 text-[13.5px] font-bold text-text transition-all hover:text-accent-gold-text active:scale-95"
                     aria-label="Próximo capítulo"
                 >
                     Próximo

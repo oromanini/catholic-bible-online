@@ -45,16 +45,15 @@ export default function ChapterReader({
 
             <div className="lg:grid lg:grid-cols-[1fr_260px] lg:items-start lg:gap-10">
                 <div className="max-w-3xl">
-                    <div className="mb-6 flex items-center justify-between">
-                        <Link
-                            href={bible.books(version.code)}
-                            className="text-sm text-reading-muted hover:text-reading-fg"
-                        >
-                            ← Livros
-                        </Link>
-                    </div>
+                    <Link
+                        href={bible.books(version.code)}
+                        className="mb-[22px] inline-block text-sm font-bold text-text-muted hover:text-text"
+                    >
+                        ← Livros
+                    </Link>
 
-                    <h1 className="mb-6 font-serif text-2xl">
+                    <div className="bg-gold-rose-gradient mb-2 h-[3px] w-[46px] rounded-full" />
+                    <h1 className="mb-7 font-display text-[40px] font-semibold text-text">
                         {book.name} {chapter.number}
                     </h1>
 
@@ -70,9 +69,11 @@ export default function ChapterReader({
                         />
                     </div>
 
-                    <VerseList verses={verses} />
+                    <div className="rounded-[20px] bg-reading-bg p-9 shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
+                        <VerseList verses={verses} />
+                    </div>
 
-                    <div className="mt-10">
+                    <div className="mt-7">
                         <ChapterNavigator
                             versionCode={version.code}
                             bookSlug={book.slug}

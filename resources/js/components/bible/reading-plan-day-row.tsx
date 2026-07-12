@@ -53,10 +53,10 @@ export default function ReadingPlanDayRow({
     return (
         <div
             className={cn(
-                'flex items-center gap-3 rounded-lg border px-4 py-3 transition-colors',
+                'flex items-center gap-3 rounded-[14px] border px-4 py-3 transition-colors',
                 completed
-                    ? 'border-reading-muted/10 bg-reading-muted/5'
-                    : 'border-reading-muted/15',
+                    ? 'border-surface-border/60 bg-surface'
+                    : 'border-surface-border',
             )}
         >
             {canTrackProgress && (
@@ -72,8 +72,8 @@ export default function ReadingPlanDayRow({
                     className={cn(
                         'flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all active:scale-90',
                         completed
-                            ? 'border-reading-fg bg-reading-fg text-reading-bg'
-                            : 'border-reading-muted/30 text-transparent',
+                            ? 'border-accent-gold bg-accent-gold text-[#1a1230]'
+                            : 'border-surface-border text-transparent',
                     )}
                 >
                     <Check
@@ -86,9 +86,7 @@ export default function ReadingPlanDayRow({
             )}
 
             <div>
-                <p className="text-xs text-reading-muted">
-                    Dia {day.dayNumber}
-                </p>
+                <p className="text-xs text-text-muted">Dia {day.dayNumber}</p>
                 {first && (
                     <Link
                         href={bible.read({
@@ -97,8 +95,8 @@ export default function ReadingPlanDayRow({
                             chapter: first.chapterStart,
                         })}
                         className={cn(
-                            'text-sm transition-colors hover:underline',
-                            completed && 'text-reading-muted line-through',
+                            'text-sm text-text transition-colors hover:underline',
+                            completed && 'text-text-muted line-through',
                         )}
                     >
                         {label}

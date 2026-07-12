@@ -1,8 +1,11 @@
 import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, ListChecks, Search } from 'lucide-react';
 import type { PropsWithChildren } from 'react';
+import BibleMobileNav from '@/components/bible/bible-mobile-nav';
+import BibleNav from '@/components/bible/bible-nav';
 import BibleUserMenu from '@/components/bible/bible-user-menu';
+import FloatingOrbs from '@/components/bible/floating-orbs';
 import ReadingThemeToggle from '@/components/bible/reading-theme-toggle';
+import TypefaceToggle from '@/components/bible/typeface-toggle';
 import bible from '@/routes/bible';
 
 type SharedBibleProps = {
@@ -10,43 +13,45 @@ type SharedBibleProps = {
 };
 
 export default function BibleReaderLayout({ children }: PropsWithChildren) {
-    const { props } = usePage<SharedBibleProps>();
+    const { props, component } = usePage<SharedBibleProps>();
     const versionCode = props.version?.code;
+    const isReader = component === 'bible/chapter-reader';
 
     return (
-        <div className="min-h-screen bg-reading-bg text-reading-fg">
-            <header className="sticky top-0 z-10 border-b border-reading-muted/15 bg-reading-bg/95 backdrop-blur">
-                <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-3">
+        <div className="bg-page relative min-h-screen w-full text-text">
+            <FloatingOrbs intensity={isReader ? 'subtle' : 'vivid'} />
+
+            <div className="sticky top-0 z-20 flex justify-center px-5 pt-[18px]">
+                <div className="flex max-w-full items-center gap-1.5 rounded-full border border-surface-border bg-[var(--nav-bg)] py-2 pr-2.5 pl-4.5 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-[18px]">
                     <Link
                         href={versionCode ? bible.books(versionCode) : '/'}
-                        className="flex items-center gap-2 text-sm font-medium"
+                        className="mr-3.5 flex shrink-0 items-center gap-2 whitespace-nowrap"
                     >
-                        <BookOpen className="h-4 w-4" aria-hidden />
-                        <span>Bíblia Católica</span>
+                        <span className="font-display text-[19px] font-semibold text-accent-gold-text">
+                            ✝
+                        </span>
+                        <span className="font-display text-[19px] font-semibold text-text">
+                            Bíblia Católica
+                        </span>
                     </Link>
 
-                    <div className="flex items-center gap-2">
-                        <Link
-                            href={bible.plans.index()}
-                            aria-label="Planos de leitura"
-                            className="rounded-lg p-2 text-reading-muted transition-colors hover:bg-reading-muted/10 hover:text-reading-fg"
-                        >
-                            <ListChecks className="h-4 w-4" />
-                        </Link>
-                        <Link
-                            href={bible.search()}
-                            aria-label="Buscar na Bíblia"
-                            className="rounded-lg p-2 text-reading-muted transition-colors hover:bg-reading-muted/10 hover:text-reading-fg"
-                        >
-                            <Search className="h-4 w-4" />
-                        </Link>
-                        <ReadingThemeToggle />
-                        <BibleUserMenu />
-                    </div>
-                </div>
-            </header>
+                    <div className="hidden items-center gap-1.5 sm:flex">
+                        <BibleNav versionCode={versionCode} />
 
-            <main className="mx-auto max-w-5xl px-4 py-6">{children}</main>
+                        <div className="ml-2 flex shrink-0 items-center gap-1">
+                            <TypefaceToggle />
+                            <ReadingThemeToggle />
+                            <BibleUserMenu />
+                        </div>
+                    </div>
+
+                    <BibleMobileNav versionCode={versionCode} />
+                </div>
+            </div>
+
+            <main className="relative z-[5] mx-auto max-w-5xl px-4 py-6">
+                {children}
+            </main>
         </div>
     );
 }

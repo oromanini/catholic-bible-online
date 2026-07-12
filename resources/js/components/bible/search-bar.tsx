@@ -21,17 +21,21 @@ export default function SearchBar({ versionCode, initialQuery = '' }: Props) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="flex gap-2">
+        <form
+            onSubmit={handleSubmit}
+            className="flex items-center gap-3 rounded-full border-[1.5px] border-accent-gold bg-surface py-2 pr-2 pl-[22px] shadow-[0_0_0_6px_var(--accent-gold-soft)]"
+        >
+            <span className="text-base text-accent-gold-text">⌕</span>
             <input
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder="Buscar palavra ou trecho..."
-                className="w-full rounded-lg border border-reading-muted/20 bg-reading-bg px-3 py-2 text-sm text-reading-fg transition-colors placeholder:text-reading-muted focus:border-reading-muted/50 focus:outline-none"
+                className="w-full border-none bg-transparent text-[15.5px] text-text placeholder:text-text-muted focus:outline-none"
             />
             <button
                 type="submit"
-                className="shrink-0 rounded-lg bg-reading-fg px-4 py-2 text-sm font-medium text-reading-bg transition-all active:scale-95"
+                className="bg-gold-rose-gradient shrink-0 rounded-full px-[22px] py-3 text-[13.5px] font-extrabold text-white transition-transform [text-shadow:0_1px_2px_rgba(0,0,0,0.25)] active:scale-95"
             >
                 Buscar
             </button>
