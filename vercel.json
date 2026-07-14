@@ -1,0 +1,4 @@
+{
+    "installCommand": "bash vercel-install.sh",
+    "outputDirectory": "public"
+}

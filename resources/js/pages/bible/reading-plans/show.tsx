@@ -18,24 +18,26 @@ export default function ReadingPlanShow({ version, plan, days }: Props) {
     const completedCount = days.filter((day) => day.completed).length;
 
     return (
-        <>
+        <div className="animate-fade-up mx-auto max-w-[800px]">
             <Head title={plan.name} />
 
-            <div className="mb-6">
-                <p className="text-sm text-reading-muted">Plano de leitura</p>
-                <h1 className="mt-1 font-serif text-2xl">{plan.name}</h1>
+            <div className="mb-8 text-center">
+                <p className="text-sm text-text-muted">Plano de leitura</p>
+                <h1 className="mt-1 font-display text-[38px] font-semibold text-text">
+                    {plan.name}
+                </h1>
                 {plan.description && (
-                    <p className="mt-2 text-sm text-reading-muted">
+                    <p className="mt-2 text-sm text-text-muted">
                         {plan.description}
                     </p>
                 )}
 
                 {auth.user ? (
-                    <p className="mt-4 text-sm">
+                    <p className="mt-4 text-sm font-bold text-accent-gold-text">
                         {completedCount} de {plan.durationDays} dias concluídos
                     </p>
                 ) : (
-                    <p className="mt-4 text-sm text-reading-muted">
+                    <p className="mt-4 text-sm text-text-muted">
                         Entre na sua conta para acompanhar seu progresso dia a
                         dia.
                     </p>
@@ -53,6 +55,6 @@ export default function ReadingPlanShow({ version, plan, days }: Props) {
                     />
                 ))}
             </div>
-        </>
+        </div>
     );
 }

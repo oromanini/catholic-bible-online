@@ -62,7 +62,7 @@ class ReadingPlanController extends Controller
                 'dayNumber' => $day->day_number,
                 'references' => collect($day->references_json)->map(fn (array $ref) => [
                     'bookSlug' => $ref['book'],
-                    'bookName' => $bookNames[$ref['book']]->translations->first()?->name ?? $ref['book'],
+                    'bookName' => $bookNames[$ref['book']]->translations->first()->name ?? $ref['book'],
                     'chapterStart' => $ref['chapter_start'],
                     'chapterEnd' => $ref['chapter_end'],
                 ]),

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $version = Version::where('is_default', true)->first() ?? Version::orderBy('sort_order')->first();
 
-    abort_unless($version, 404);
+    abort_unless($version !== null, 404);
 
     return redirect()->route('bible.books', ['version' => $version->code]);
 })->name('home');

@@ -35,6 +35,7 @@ final class GoogleCustomSearchProvider implements QuoteSearchProviderInterface
             throw new RuntimeException("Falha na busca: HTTP {$response->status()} — {$response->body()}");
         }
 
+        /** @var array<int, array<string, mixed>> $items */
         $items = $response->json('items', []);
 
         return collect($items)

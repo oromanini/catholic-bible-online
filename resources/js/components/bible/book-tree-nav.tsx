@@ -1,57 +1,43 @@
 import { Link } from '@inertiajs/react';
-import {
-    CATEGORY_LABELS,
-    CATEGORY_ORDER,
-    TESTAMENT_LABELS,
-    TESTAMENT_ORDER,
-} from '@/lib/bible/labels';
+import { CATEGORY_LABELS, CATEGORY_ORDER } from '@/lib/bible/labels';
 import bible from '@/routes/bible';
 import type { BibleNavTree } from '@/types/bible';
 
 type Props = {
     versionCode: string;
     books: BibleNavTree;
+    testament: string;
 };
 
-export default function BookTreeNav({ versionCode, books }: Props) {
+export default function BookTreeNav({ versionCode, books, testament }: Props) {
+    const categories = books[testament] ?? {};
+
     return (
-        <div className="space-y-10">
-            {TESTAMENT_ORDER.filter((testament) => books[testament]).map(
-                (testament) => (
-                    <section key={testament}>
-                        <h2 className="mb-4 text-lg font-medium">
-                            {TESTAMENT_LABELS[testament]}
-                        </h2>
+        <div className="space-y-8">
+            {CATEGORY_ORDER.filter((category) => categories[category]).map(
+                (category) => (
+                    <div key={category}>
+                        <h3 className="mb-3.5 text-[12.5px] font-bold tracking-[0.08em] text-text-muted uppercase">
+                            {CATEGORY_LABELS[category]}
+                        </h3>
 
-                        <div className="space-y-6">
-                            {CATEGORY_ORDER.filter(
-                                (category) => books[testament][category],
-                            ).map((category) => (
-                                <div key={category}>
-                                    <h3 className="mb-2 text-sm font-medium text-reading-muted">
-                                        {CATEGORY_LABELS[category]}
-                                    </h3>
-
-                                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                                        {books[testament][category].map(
-                                            (book) => (
-                                                <Link
-                                                    key={book.slug}
-                                                    href={bible.read({
-                                                        version: versionCode,
-                                                        book: book.slug,
-                                                    })}
-                                                    className="rounded-lg border border-reading-muted/15 px-3 py-2 text-sm transition-all hover:border-reading-muted/40 hover:bg-reading-muted/5 active:scale-95"
-                                                >
-                                                    {book.name}
-                                                </Link>
-                                            ),
-                                        )}
+                        <div className="grid grid-cols-[repeat(auto-fill,minmax(150px,1fr))] gap-3">
+                            {categories[category].map((book) => (
+                                <Link
+                                    key={book.slug}
+                                    href={bible.read({
+                                        version: versionCode,
+                                        book: book.slug,
+                                    })}
+                                    className="rounded-[14px] border border-surface-border bg-surface p-4 shadow-[0_2px_10px_rgba(0,0,0,0.04)] backdrop-blur-[10px] transition-all duration-250 ease-out hover:-translate-y-1 hover:border-accent-gold hover:shadow-[0_14px_28px_var(--accent-gold-soft)] active:scale-95"
+                                >
+                                    <div className="font-display text-lg font-semibold text-text">
+                                        {book.name}
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
-                    </section>
+                    </div>
                 ),
             )}
         </div>

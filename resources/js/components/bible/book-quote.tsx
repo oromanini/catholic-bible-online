@@ -61,8 +61,8 @@ export default function BookQuote({ bookSlug }: Props) {
     }
 
     return (
-        <div className="mb-8 rounded-lg border border-reading-muted/15 p-4">
-            <div className="mb-3 flex items-center gap-2 text-sm font-medium text-reading-muted">
+        <div className="mb-8 rounded-[20px] border border-surface-border bg-surface p-6 backdrop-blur-[14px]">
+            <div className="mb-3.5 flex items-center gap-2 text-[13px] font-extrabold tracking-[0.05em] text-accent-gold-text uppercase">
                 <Quote className="h-4 w-4" aria-hidden />
                 Padres da Igreja
             </div>
@@ -71,34 +71,34 @@ export default function BookQuote({ bookSlug }: Props) {
                 <button
                     type="button"
                     onClick={search}
-                    className="rounded-lg border border-reading-muted/25 px-4 py-2 text-sm transition-all hover:bg-reading-muted/5 active:scale-95"
+                    className="rounded-xl border border-surface-border px-4 py-2 text-sm font-bold text-text transition-all hover:bg-accent-gold-soft active:scale-95"
                 >
                     Buscar citação sobre este livro
                 </button>
             )}
 
             {status === 'loading' && (
-                <div className="flex items-center gap-2 text-sm text-reading-muted">
+                <div className="flex items-center gap-2 text-sm text-text-muted">
                     <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
                     Buscando em fontes confiáveis…
                 </div>
             )}
 
             {status === 'empty' && (
-                <p className="animate-fade-in text-sm text-reading-muted">
+                <p className="animate-fade-in text-sm text-text-muted">
                     Não encontramos uma citação confiável para este livro.
                 </p>
             )}
 
             {status === 'error' && (
                 <div className="animate-fade-in">
-                    <p className="text-sm text-reading-muted">
+                    <p className="text-sm text-text-muted">
                         Não foi possível buscar agora.
                     </p>
                     <button
                         type="button"
                         onClick={search}
-                        className="mt-2 text-sm underline hover:no-underline"
+                        className="mt-2 text-sm text-text underline hover:no-underline"
                     >
                         Tentar de novo
                     </button>
@@ -106,16 +106,16 @@ export default function BookQuote({ bookSlug }: Props) {
             )}
 
             {status === 'ready' && quote && (
-                <div className="animate-fade-in">
-                    <blockquote className="font-serif text-reading-fg italic">
+                <div className="animate-fade-up">
+                    <blockquote className="font-serif text-text italic">
                         “{quote.quoteTranslated ?? quote.quoteOriginal}”
                     </blockquote>
-                    <p className="mt-2 text-sm text-reading-muted">
+                    <p className="mt-2 text-sm text-text-muted">
                         — {quote.author}
                         {quote.workTitle ? `, ${quote.workTitle}` : ''}
                     </p>
                     {quote.sourceUrl && (
-                        <p className="mt-3 text-xs text-reading-muted">
+                        <p className="mt-3 text-xs text-text-muted">
                             {quote.quoteTranslated
                                 ? 'Tradução livre do texto original. '
                                 : ''}

@@ -1,5 +1,5 @@
 import { usePage } from '@inertiajs/react';
-import { Loader2, Sparkles, ThumbsDown, ThumbsUp } from 'lucide-react';
+import { Sparkles, ThumbsDown, ThumbsUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { apiFetch } from '@/lib/api-fetch';
 import { cn } from '@/lib/utils';
@@ -97,8 +97,8 @@ export default function AiCommentary({
     }
 
     return (
-        <div className="mt-10 rounded-lg border border-reading-muted/15 p-4">
-            <div className="mb-3 flex items-center gap-2 text-sm font-medium text-reading-muted">
+        <div className="mt-9 rounded-[20px] border border-surface-border bg-surface p-7 backdrop-blur-[14px]">
+            <div className="mb-4 flex items-center gap-2 text-[13px] font-extrabold tracking-[0.05em] text-accent-gold-text uppercase">
                 <Sparkles className="h-4 w-4" aria-hidden />
                 Comentário com IA
             </div>
@@ -107,28 +107,52 @@ export default function AiCommentary({
                 <button
                     type="button"
                     onClick={generate}
-                    className="rounded-lg border border-reading-muted/25 px-4 py-2 text-sm transition-all hover:bg-reading-muted/5 active:scale-95"
+                    className="bg-gold-rose-gradient rounded-xl px-[22px] py-3 text-[13.5px] font-extrabold text-white transition-transform [text-shadow:0_1px_2px_rgba(0,0,0,0.25)] active:scale-95"
                 >
                     Gerar comentário deste capítulo
                 </button>
             )}
 
             {status === 'loading' && (
-                <div className="flex items-center gap-2 text-sm text-reading-muted">
-                    <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
-                    Gerando comentário…
+                <div>
+                    <div className="mb-3.5 flex items-center gap-3.5">
+                        <div
+                            className="animate-spin-glow h-[26px] w-[26px] rounded-full"
+                            style={{
+                                background:
+                                    'conic-gradient(var(--accent-gold), transparent 65%)',
+                            }}
+                        />
+                        <span className="text-sm text-text-muted">
+                            Iluminando o texto…
+                        </span>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                        {[100, 92, 75].map((width, index) => (
+                            <div
+                                key={width}
+                                className="animate-shimmer h-3 rounded-md"
+                                style={{
+                                    width: `${width}%`,
+                                    backgroundImage:
+                                        'linear-gradient(90deg, var(--surface-border) 25%, var(--accent-gold-soft) 50%, var(--surface-border) 75%)',
+                                    animationDelay: `${index * 0.15}s`,
+                                }}
+                            />
+                        ))}
+                    </div>
                 </div>
             )}
 
             {status === 'error' && (
                 <div className="animate-fade-in">
-                    <p className="text-sm text-reading-muted">
+                    <p className="text-sm text-text-muted">
                         Não foi possível gerar o comentário agora.
                     </p>
                     <button
                         type="button"
                         onClick={generate}
-                        className="mt-2 text-sm underline hover:no-underline"
+                        className="mt-2 text-sm text-text underline hover:no-underline"
                     >
                         Tentar de novo
                     </button>
@@ -136,11 +160,11 @@ export default function AiCommentary({
             )}
 
             {status === 'ready' && content && (
-                <div className="animate-fade-in">
-                    <p className="font-serif whitespace-pre-line text-reading-fg">
+                <div className="animate-fade-up">
+                    <p className="font-serif text-[15.5px] leading-[1.75] whitespace-pre-line text-text">
                         {content}
                     </p>
-                    <p className="mt-3 text-xs text-reading-muted">
+                    <p className="mt-3.5 text-[11.5px] text-text-muted">
                         Sugestão gerada por IA — não substitui a orientação de
                         um sacerdote ou catequista.
                     </p>
@@ -155,8 +179,8 @@ export default function AiCommentary({
                                 className={cn(
                                     'rounded-md p-1.5 transition-all active:scale-90',
                                     feedback === 'up'
-                                        ? 'bg-reading-fg text-reading-bg'
-                                        : 'text-reading-muted hover:bg-reading-muted/10',
+                                        ? 'bg-accent-gold text-[#1a1230]'
+                                        : 'text-text-muted hover:bg-accent-gold-soft',
                                 )}
                             >
                                 <ThumbsUp className="h-4 w-4" />
@@ -169,8 +193,8 @@ export default function AiCommentary({
                                 className={cn(
                                     'rounded-md p-1.5 transition-all active:scale-90',
                                     feedback === 'down'
-                                        ? 'bg-reading-fg text-reading-bg'
-                                        : 'text-reading-muted hover:bg-reading-muted/10',
+                                        ? 'bg-accent-gold text-[#1a1230]'
+                                        : 'text-text-muted hover:bg-accent-gold-soft',
                                 )}
                             >
                                 <ThumbsDown className="h-4 w-4" />

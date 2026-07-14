@@ -63,6 +63,9 @@ class ReaderController extends Controller
         ]);
     }
 
+    /**
+     * @return array{prev: array{book: string, chapter: int}|null, next: array{book: string, chapter: int}|null}
+     */
     private function chapterNavigation(Book $book, int $chapterNumber): array
     {
         $prev = null;
