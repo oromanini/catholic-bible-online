@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Version extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'code',
         'name',
@@ -30,21 +27,33 @@ class Version extends Model
         ];
     }
 
+    /**
+     * @return HasMany<BookTranslation, $this>
+     */
     public function bookTranslations(): HasMany
     {
         return $this->hasMany(BookTranslation::class);
     }
 
+    /**
+     * @return HasMany<BookIntroduction, $this>
+     */
     public function bookIntroductions(): HasMany
     {
         return $this->hasMany(BookIntroduction::class);
     }
 
+    /**
+     * @return HasMany<Chapter, $this>
+     */
     public function chapters(): HasMany
     {
         return $this->hasMany(Chapter::class);
     }
 
+    /**
+     * @return HasMany<Verse, $this>
+     */
     public function verses(): HasMany
     {
         return $this->hasMany(Verse::class);

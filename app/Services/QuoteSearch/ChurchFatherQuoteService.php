@@ -185,6 +185,20 @@ final class ChurchFatherQuoteService
         $cleaned = trim(preg_replace('/^```(?:json)?|```$/m', '', trim($raw)) ?? $raw);
         $data = json_decode($cleaned, true);
 
-        return is_array($data) ? $data : null;
+        if (! is_array($data) || ! array_key_exists('quote', $data)) {
+            return null;
+        }
+
+        $result = ['quote' => is_string($data['quote']) ? $data['quote'] : null];
+
+        if (is_string($data['author'] ?? null)) {
+            $result['author'] = $data['author'];
+        }
+
+        if (is_string($data['work'] ?? null)) {
+            $result['work'] = $data['work'];
+        }
+
+        return $result;
     }
 }

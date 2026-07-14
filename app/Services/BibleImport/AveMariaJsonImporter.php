@@ -25,8 +25,14 @@ final class AveMariaJsonImporter implements BibleImporterInterface
             throw new RuntimeException("Arquivo fonte não encontrado: {$path}");
         }
 
+        $contents = file_get_contents($path);
+
+        if ($contents === false) {
+            throw new RuntimeException("Não foi possível ler o arquivo: {$path}");
+        }
+
         try {
-            $data = json_decode(file_get_contents($path), true, flags: JSON_THROW_ON_ERROR);
+            $data = json_decode($contents, true, flags: JSON_THROW_ON_ERROR);
         } catch (JsonException $e) {
             throw new RuntimeException("JSON inválido em {$path}: {$e->getMessage()}", previous: $e);
         }

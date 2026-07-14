@@ -29,7 +29,7 @@ class ReadingPlansSeeder extends Seeder
         $version = Version::where('is_default', true)->first() ?? Version::orderBy('sort_order')->first();
 
         if (! $version) {
-            $this->command?->warn('Nenhuma versão cadastrada — rode VersionsSeeder e `php artisan bible:import` antes de gerar planos de leitura.');
+            $this->command->warn('Nenhuma versão cadastrada — rode VersionsSeeder e `php artisan bible:import` antes de gerar planos de leitura.');
 
             return;
         }
@@ -40,7 +40,7 @@ class ReadingPlansSeeder extends Seeder
             ->pluck('total', 'book_id');
 
         if ($chapterCounts->isEmpty()) {
-            $this->command?->warn('Nenhum capítulo importado ainda — rode `php artisan bible:import` antes de gerar planos de leitura.');
+            $this->command->warn('Nenhum capítulo importado ainda — rode `php artisan bible:import` antes de gerar planos de leitura.');
 
             return;
         }

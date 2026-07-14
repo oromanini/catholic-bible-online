@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ReadingPlan extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'slug',
         'name',
@@ -25,11 +22,17 @@ class ReadingPlan extends Model
         ];
     }
 
+    /**
+     * @return HasMany<ReadingPlanDay, $this>
+     */
     public function days(): HasMany
     {
         return $this->hasMany(ReadingPlanDay::class);
     }
 
+    /**
+     * @return HasMany<ReadingPlanProgress, $this>
+     */
     public function progress(): HasMany
     {
         return $this->hasMany(ReadingPlanProgress::class);

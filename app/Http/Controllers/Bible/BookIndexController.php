@@ -25,6 +25,9 @@ class BookIndexController extends Controller
         ]);
     }
 
+    /**
+     * @return array{versionCode: string, bookSlug: string, bookName: string, chapterNumber: int, updatedAt: string|null}|null
+     */
     private function serverPosition(Version $version): ?array
     {
         $user = Auth::user();

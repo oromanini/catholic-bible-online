@@ -24,6 +24,9 @@ class BookQuoteController extends Controller
         return response()->json($this->format($quote));
     }
 
+    /**
+     * @return array{available: bool, author?: string, workTitle?: string|null, quoteOriginal?: string, quoteTranslated?: string|null, sourceUrl?: string|null, sourceDomain?: string|null}
+     */
     private function format(?BookQuote $quote): array
     {
         if (! $quote) {

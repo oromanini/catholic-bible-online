@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property array<int, array{book: string, chapter_start: int, chapter_end: int}> $references_json
+ */
 class ReadingPlanDay extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'reading_plan_id',
         'day_number',
@@ -23,6 +23,9 @@ class ReadingPlanDay extends Model
         ];
     }
 
+    /**
+     * @return BelongsTo<ReadingPlan, $this>
+     */
     public function plan(): BelongsTo
     {
         return $this->belongsTo(ReadingPlan::class, 'reading_plan_id');
