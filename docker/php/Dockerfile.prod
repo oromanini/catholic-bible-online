@@ -20,6 +20,15 @@ WORKDIR /var/www/html
 
 COPY . .
 
+RUN mkdir -p storage/framework/cache/data \
+    storage/framework/sessions \
+    storage/framework/testing \
+    storage/framework/views \
+    storage/logs \
+    storage/app/private \
+    storage/app/public \
+    bootstrap/cache
+
 RUN composer install --no-interaction --no-dev --prefer-dist --no-progress --optimize-autoloader
 
 RUN cp .env.example .env \
