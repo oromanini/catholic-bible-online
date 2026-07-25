@@ -22,7 +22,14 @@ COPY . .
 
 RUN composer install --no-interaction --no-dev --prefer-dist --no-progress --optimize-autoloader
 
+RUN cp .env.example .env \
+    && sed -i 's/^SESSION_DRIVER=.*/SESSION_DRIVER=file/' .env \
+    && sed -i 's/^CACHE_STORE=.*/CACHE_STORE=file/' .env \
+    && php artisan key:generate --no-interaction --force
+
 RUN npm ci && npm run build && rm -rf node_modules
+
+RUN rm -f .env
 
 RUN chmod -R 775 storage bootstrap/cache
 
