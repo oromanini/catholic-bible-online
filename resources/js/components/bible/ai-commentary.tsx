@@ -97,9 +97,9 @@ export default function AiCommentary({
     }
 
     return (
-        <div className="mt-9 rounded-[20px] border border-surface-border bg-surface p-7 backdrop-blur-[14px]">
-            <div className="mb-4 flex items-center gap-2 text-[13px] font-extrabold tracking-[0.05em] text-accent-gold-text uppercase">
-                <Sparkles className="h-4 w-4" aria-hidden />
+        <div className="mt-16 border-t border-rule pt-10">
+            <div className="type-eyebrow mb-5 flex items-center gap-2 text-text-faint">
+                <Sparkles className="h-3.5 w-3.5" aria-hidden />
                 Comentário com IA
             </div>
 
@@ -107,7 +107,7 @@ export default function AiCommentary({
                 <button
                     type="button"
                     onClick={generate}
-                    className="bg-gold-rose-gradient rounded-xl px-[22px] py-3 text-[13.5px] font-extrabold text-white transition-transform [text-shadow:0_1px_2px_rgba(0,0,0,0.25)] active:scale-95"
+                    className="btn btn-quiet px-5 py-3 text-[13.5px]"
                 >
                     Gerar comentário deste capítulo
                 </button>
@@ -161,10 +161,10 @@ export default function AiCommentary({
 
             {status === 'ready' && content && (
                 <div className="animate-fade-up">
-                    <p className="font-serif text-[15.5px] leading-[1.75] whitespace-pre-line text-text">
+                    <p className="max-w-[38em] font-serif text-[16px] leading-[1.8] whitespace-pre-line text-text">
                         {content}
                     </p>
-                    <p className="mt-3.5 text-[11.5px] text-text-muted">
+                    <p className="mt-5 text-[11.5px] text-text-faint">
                         Sugestão gerada por IA — não substitui a orientação de
                         um sacerdote ou catequista.
                     </p>
@@ -179,7 +179,7 @@ export default function AiCommentary({
                                 className={cn(
                                     'rounded-md p-1.5 transition-all active:scale-90',
                                     feedback === 'up'
-                                        ? 'bg-accent-gold text-[#1a1230]'
+                                        ? 'bg-accent-gold text-[var(--accent-gold-ink)]'
                                         : 'text-text-muted hover:bg-accent-gold-soft',
                                 )}
                             >
@@ -193,7 +193,7 @@ export default function AiCommentary({
                                 className={cn(
                                     'rounded-md p-1.5 transition-all active:scale-90',
                                     feedback === 'down'
-                                        ? 'bg-accent-gold text-[#1a1230]'
+                                        ? 'bg-accent-gold text-[var(--accent-gold-ink)]'
                                         : 'text-text-muted hover:bg-accent-gold-soft',
                                 )}
                             >

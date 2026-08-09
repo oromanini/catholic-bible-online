@@ -6,12 +6,18 @@ type Props = {
 
 export default function VerseList({ verses }: Props) {
     return (
-        <div className="animate-fade-in font-serif text-[19px] leading-[1.9] text-reading-fg">
+        /*
+         * Os números ficam pendurados numa calha à esquerda, como numa Bíblia
+         * impressa, em vez de sobrescritos no meio da frase. A margem do texto
+         * fica reta e a leitura não é interrompida a cada versículo.
+         * `max-w-[38em]` mantém a medida em ~70 caracteres por linha.
+         */
+        <div className="animate-fade-in mx-auto max-w-[38em] pl-8 font-serif text-[19px] leading-[1.85] text-reading-fg">
             {verses.map((verse) => (
-                <p key={verse.number} className="mb-[18px]">
-                    <sup className="mr-1.5 font-sans text-[11px] font-bold text-accent-gold-text select-none">
+                <p key={verse.number} className="relative mb-[1.15em]">
+                    <span className="tabular absolute -left-8 w-6 text-right text-[11px] leading-[2.9] font-semibold text-accent-gold-text/70 select-none">
                         {verse.number}
-                    </sup>
+                    </span>
                     {verse.text}
                 </p>
             ))}

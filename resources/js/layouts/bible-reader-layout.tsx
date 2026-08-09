@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react';
 import BibleMobileNav from '@/components/bible/bible-mobile-nav';
 import BibleNav from '@/components/bible/bible-nav';
 import BibleUserMenu from '@/components/bible/bible-user-menu';
-import FloatingOrbs from '@/components/bible/floating-orbs';
+import PageAtmosphere from '@/components/bible/page-atmosphere';
 import ReadingThemeToggle from '@/components/bible/reading-theme-toggle';
 import TypefaceToggle from '@/components/bible/typeface-toggle';
 import bible from '@/routes/bible';
@@ -13,32 +13,41 @@ type SharedBibleProps = {
 };
 
 export default function BibleReaderLayout({ children }: PropsWithChildren) {
-    const { props, component } = usePage<SharedBibleProps>();
+    const { props } = usePage<SharedBibleProps>();
     const versionCode = props.version?.code;
-    const isReader = component === 'bible/chapter-reader';
 
     return (
-        <div className="bg-page relative min-h-screen w-full text-text">
-            <FloatingOrbs intensity={isReader ? 'subtle' : 'vivid'} />
+        <div className="relative min-h-screen w-full bg-page text-text">
+            <PageAtmosphere />
 
-            <div className="sticky top-0 z-20 flex justify-center px-5 pt-[18px]">
-                <div className="flex max-w-full items-center gap-1.5 rounded-full border border-surface-border bg-[var(--nav-bg)] py-2 pr-2.5 pl-4.5 shadow-[0_8px_30px_rgba(0,0,0,0.12)] backdrop-blur-[18px]">
+            {/*
+             * Antes: uma "pílula" flutuante com sombra pesada e tudo espremido.
+             * Agora: uma barra de largura total assentada num filete de 1px —
+             * mais silenciosa e devolve a atenção ao conteúdo.
+             */}
+            <header className="sticky top-0 z-20 border-b border-rule bg-[var(--nav-bg)] backdrop-blur-xl">
+                <div className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-5 sm:px-8">
                     <Link
                         href={versionCode ? bible.books(versionCode) : '/'}
-                        className="mr-3.5 flex shrink-0 items-center gap-2 whitespace-nowrap"
+                        className="flex shrink-0 items-center gap-2.5 whitespace-nowrap"
                     >
-                        <span className="font-display text-[19px] font-semibold text-accent-gold-text">
-                            ✝
-                        </span>
-                        <span className="font-display text-[19px] font-semibold text-text">
+                        <svg
+                            viewBox="0 0 16 20"
+                            className="h-[18px] w-[14px] text-accent-gold"
+                            fill="currentColor"
+                            aria-hidden
+                        >
+                            <path d="M6.9 0h2.2v5.4H16v2.2H9.1V20H6.9V7.6H0V5.4h6.9V0Z" />
+                        </svg>
+                        <span className="font-display text-[21px] leading-none font-medium tracking-[-0.01em] text-text">
                             Bíblia Católica
                         </span>
                     </Link>
 
-                    <div className="hidden items-center gap-1.5 sm:flex">
+                    <div className="ml-auto hidden items-center gap-5 sm:flex">
                         <BibleNav versionCode={versionCode} />
 
-                        <div className="ml-2 flex shrink-0 items-center gap-1">
+                        <div className="flex shrink-0 items-center gap-1.5 border-l border-rule pl-5">
                             <TypefaceToggle />
                             <ReadingThemeToggle />
                             <BibleUserMenu />
@@ -47,9 +56,9 @@ export default function BibleReaderLayout({ children }: PropsWithChildren) {
 
                     <BibleMobileNav versionCode={versionCode} />
                 </div>
-            </div>
+            </header>
 
-            <main className="relative z-[5] mx-auto max-w-5xl px-4 py-6">
+            <main className="relative z-[5] mx-auto max-w-6xl px-5 py-16 sm:px-8">
                 {children}
             </main>
         </div>

@@ -33,7 +33,7 @@ export default function ReadingThemeToggle({
             onClick={() => updateTheme(next)}
             aria-label={`Tema ${LABELS[theme]} — trocar para ${LABELS[next]}`}
             className={cn(
-                'flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full bg-accent-gold-soft text-accent-gold-text transition-transform active:scale-90',
+                'flex h-9 w-9 shrink-0 items-center justify-center rounded-tile text-text-muted transition-colors hover:bg-accent-gold-soft hover:text-accent-gold-text',
                 className,
             )}
             {...props}

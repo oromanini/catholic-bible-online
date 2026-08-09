@@ -24,7 +24,7 @@ export default function ChapterNavigator({
     );
 
     return (
-        <div className="flex items-center justify-between gap-3 rounded-[14px] border border-surface-border bg-surface px-3.5 py-2.5">
+        <div className="flex items-center justify-between gap-3 border-y border-rule py-2.5">
             {navigation.prev ? (
                 <Link
                     href={bible.read({
@@ -32,7 +32,7 @@ export default function ChapterNavigator({
                         book: navigation.prev.book,
                         chapter: navigation.prev.chapter,
                     })}
-                    className="flex items-center gap-1 rounded-lg px-2 py-1 text-[13.5px] font-bold text-text-muted transition-all hover:text-text active:scale-95"
+                    className="flex items-center gap-1 text-[13.5px] font-medium text-text-muted transition-colors hover:text-text"
                     aria-label="Capítulo anterior"
                 >
                     <ChevronLeft className="h-4 w-4" />
@@ -54,7 +54,7 @@ export default function ChapterNavigator({
                         }),
                     )
                 }
-                className="rounded-lg border-none bg-transparent px-2 py-1.5 text-[12.5px] font-bold text-accent-gold-text"
+                className="rounded-tile border-none bg-transparent px-1 py-1 text-[12.5px] font-medium text-text-muted"
             >
                 {chapters.map((number) => (
                     <option key={number} value={number}>
@@ -70,7 +70,7 @@ export default function ChapterNavigator({
                         book: navigation.next.book,
                         chapter: navigation.next.chapter,
                     })}
-                    className="flex items-center gap-1 rounded-lg px-2 py-1 text-[13.5px] font-bold text-text transition-all hover:text-accent-gold-text active:scale-95"
+                    className="flex items-center gap-1 text-[13.5px] font-medium text-text transition-colors hover:text-accent-gold-text"
                     aria-label="Próximo capítulo"
                 >
                     Próximo

@@ -28,14 +28,14 @@ export default function BibleMobileNav({ versionCode }: Props) {
                 <button
                     type="button"
                     aria-label="Abrir menu"
-                    className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-full bg-accent-gold-soft text-accent-gold-text sm:hidden"
+                    className="ml-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-tile text-text-muted transition-colors hover:bg-accent-gold-soft hover:text-accent-gold-text sm:hidden"
                 >
                     <Menu className="h-[18px] w-[18px]" />
                 </button>
             </SheetTrigger>
             <SheetContent
                 side="right"
-                className="bg-page w-[280px] gap-0 border-surface-border p-0 text-text sm:hidden"
+                className="w-[280px] gap-0 border-surface-border bg-page p-0 text-text sm:hidden"
             >
                 <SheetTitle className="sr-only">Menu</SheetTitle>
 
@@ -44,11 +44,12 @@ export default function BibleMobileNav({ versionCode }: Props) {
                         <SheetClose asChild key={label}>
                             <Link
                                 href={href}
+                                aria-current={active ? 'page' : undefined}
                                 className={cn(
-                                    'rounded-xl px-4 py-3 text-[15px] font-bold transition-colors',
+                                    'border-l-2 px-4 py-3 text-[15px] font-medium transition-colors',
                                     active
-                                        ? 'bg-gold-rose-gradient text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.25)]'
-                                        : 'text-text hover:bg-surface',
+                                        ? 'border-accent-gold text-text'
+                                        : 'border-transparent text-text-muted hover:text-text',
                                 )}
                             >
                                 {label}

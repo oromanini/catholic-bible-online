@@ -15,20 +15,22 @@ export default function SearchResults({ version, query, results }: Props) {
         <div className="animate-fade-up mx-auto max-w-[800px]">
             <Head title={query ? `Busca: ${query}` : 'Buscar'} />
 
-            <h1 className="mb-7 text-center font-display text-[38px] font-semibold text-text">
+            <h1 className="type-display mb-10 text-center text-[clamp(36px,5vw,52px)] text-text">
                 Buscar na Escritura
             </h1>
 
             <SearchBar versionCode={version.code} initialQuery={query} />
 
             {query !== '' && (
-                <p className="mt-4 text-sm text-text-muted">
+                <p className="mt-5 text-[13px] text-text-faint">
                     {results.length} resultado{results.length === 1 ? '' : 's'}{' '}
                     para &ldquo;{query}&rdquo;
                 </p>
             )}
 
-            <ul className="mt-6 space-y-3.5">
+            {/* Resultados como entradas de um índice: separados por filete,
+                sem uma caixa em volta de cada um. */}
+            <ul className="mt-4">
                 {results.map((result) => (
                     <li
                         key={`${result.book_slug}-${result.chapter}-${result.number}`}
@@ -39,13 +41,13 @@ export default function SearchResults({ version, query, results }: Props) {
                                 book: result.book_slug,
                                 chapter: result.chapter,
                             })}
-                            className="block rounded-2xl border border-surface-border bg-surface p-5 transition-all hover:border-accent-gold active:scale-[0.99]"
+                            className="group block border-b border-rule py-6 transition-colors"
                         >
-                            <p className="mb-2 text-xs font-extrabold tracking-[0.05em] text-accent-gold-text uppercase">
+                            <p className="type-eyebrow mb-2.5 text-text-faint transition-colors group-hover:text-accent-gold-text">
                                 {result.book_name} {result.chapter}:
                                 {result.number}
                             </p>
-                            <p className="font-serif text-base leading-[1.7] text-text">
+                            <p className="max-w-[42em] font-serif text-[16.5px] leading-[1.75] text-text">
                                 {result.text}
                             </p>
                         </Link>

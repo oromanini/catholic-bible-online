@@ -1,4 +1,5 @@
 import { router } from '@inertiajs/react';
+import { Search } from 'lucide-react';
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 import bible from '@/routes/bible';
@@ -21,21 +22,26 @@ export default function SearchBar({ versionCode, initialQuery = '' }: Props) {
     }
 
     return (
+        /*
+         * Antes: borda dourada de 1.5px com um halo de 6px em volta — muito
+         * ruído para um campo de texto. Agora é um filete só, e o foco é
+         * sinalizado escurecendo a borda.
+         */
         <form
             onSubmit={handleSubmit}
-            className="flex items-center gap-3 rounded-full border-[1.5px] border-accent-gold bg-surface py-2 pr-2 pl-[22px] shadow-[0_0_0_6px_var(--accent-gold-soft)]"
+            className="flex items-center gap-3 rounded-card border border-surface-border bg-surface-raised py-2 pr-2 pl-5 transition-colors focus-within:border-accent-gold"
         >
-            <span className="text-base text-accent-gold-text">⌕</span>
+            <Search className="h-4 w-4 shrink-0 text-text-faint" aria-hidden />
             <input
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Buscar palavra ou trecho..."
-                className="w-full border-none bg-transparent text-[15.5px] text-text placeholder:text-text-muted focus:outline-none"
+                placeholder="Buscar palavra ou trecho…"
+                className="w-full border-none bg-transparent text-[15.5px] text-text placeholder:text-text-faint focus:outline-none"
             />
             <button
                 type="submit"
-                className="bg-gold-rose-gradient shrink-0 rounded-full px-[22px] py-3 text-[13.5px] font-extrabold text-white transition-transform [text-shadow:0_1px_2px_rgba(0,0,0,0.25)] active:scale-95"
+                className="btn btn-ink shrink-0 px-6 py-3 text-[13.5px]"
             >
                 Buscar
             </button>

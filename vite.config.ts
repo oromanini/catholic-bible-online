@@ -21,13 +21,15 @@ export default defineConfig({
             refresh: true,
             fonts: [
                 bunny('Manrope', {
-                    weights: [400, 500, 600, 700, 800],
+                    weights: [400, 500, 600, 700],
                 }),
                 bunny('Literata', {
                     weights: [400, 500, 600],
                 }),
+                // 400/500 são os pesos que dão elegância a esta serifa de alto
+                // contraste em corpo grande; 600 fica só para casos pequenos.
                 bunny('Cormorant Garamond', {
-                    weights: [500, 600],
+                    weights: [400, 500, 600],
                     styles: ['normal', 'italic'],
                 }),
             ],

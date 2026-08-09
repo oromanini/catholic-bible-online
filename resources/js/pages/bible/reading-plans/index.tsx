@@ -11,14 +11,14 @@ export default function ReadingPlansIndex({ plans }: Props) {
         <div className="animate-fade-up mx-auto max-w-[1000px]">
             <Head title="Planos de leitura" />
 
-            <h1 className="mb-2 text-center font-display text-[38px] font-semibold text-text">
+            <h1 className="type-display mb-4 text-center text-[clamp(36px,5vw,52px)] text-text">
                 Planos de leitura
             </h1>
-            <p className="mb-10 text-center text-[15px] text-text-muted">
+            <p className="mx-auto mb-16 max-w-[420px] text-center text-[15px] leading-[1.7] text-text-muted">
                 Caminhos guiados para aprofundar sua fé, dia após dia.
             </p>
 
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5">
+            <div className="grid gap-x-12 sm:grid-cols-2">
                 {plans.map((plan) => {
                     const pct =
                         plan.durationDays > 0
@@ -32,36 +32,36 @@ export default function ReadingPlansIndex({ plans }: Props) {
                         <Link
                             key={plan.slug}
                             href={bible.plans.show(plan.slug)}
-                            className="rounded-[20px] border border-surface-border bg-surface p-[26px] backdrop-blur-[14px] transition-all hover:border-accent-gold hover:shadow-[0_14px_28px_var(--accent-gold-soft)]"
+                            className="group border-b border-rule py-7 transition-colors"
                         >
-                            <div className="mb-[18px] flex items-center gap-4">
-                                <div
-                                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full"
-                                    style={{
-                                        background: `conic-gradient(var(--accent-gold) ${pct}%, var(--surface-border) 0)`,
-                                    }}
-                                >
-                                    <div className="bg-page-solid flex h-11 w-11 items-center justify-center rounded-full text-[12.5px] font-extrabold text-accent-gold-text">
-                                        {pct}%
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className="font-display text-xl font-semibold text-text">
-                                        {plan.name}
-                                    </div>
-                                    <div className="text-[12.5px] text-text-muted">
-                                        {plan.durationDays} dias
-                                    </div>
-                                </div>
+                            <div className="mb-3 flex items-baseline justify-between gap-4">
+                                <h2 className="font-display text-[24px] leading-tight font-medium tracking-[-0.01em] text-text transition-colors group-hover:text-accent-gold-text">
+                                    {plan.name}
+                                </h2>
+                                <span className="tabular shrink-0 text-[11.5px] text-text-faint">
+                                    {plan.durationDays} dias
+                                </span>
                             </div>
+
                             {plan.description && (
-                                <p className="mb-4 text-sm text-text-muted">
+                                <p className="mb-5 max-w-[38em] text-[14px] leading-[1.65] text-text-muted">
                                     {plan.description}
                                 </p>
                             )}
-                            <span className="block w-full rounded-[11px] bg-accent-gold-soft py-[11px] text-center text-[13.5px] font-extrabold text-text">
-                                Continuar plano
-                            </span>
+
+                            {/* Barra de progresso de 2px: informa o mesmo que o
+                                disco cônico anterior ocupando muito menos. */}
+                            <div className="flex items-center gap-3">
+                                <div className="h-0.5 flex-1 overflow-hidden rounded-full bg-rule">
+                                    <div
+                                        className="h-full rounded-full bg-accent-gold transition-[width] duration-500"
+                                        style={{ width: `${pct}%` }}
+                                    />
+                                </div>
+                                <span className="tabular w-9 shrink-0 text-right text-[11.5px] text-text-faint">
+                                    {pct}%
+                                </span>
+                            </div>
                         </Link>
                     );
                 })}

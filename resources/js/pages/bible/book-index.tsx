@@ -124,83 +124,106 @@ export default function BookIndex({ version, books, serverPosition }: Props) {
         <>
             <Head title={version.name} />
 
-            <div className="animate-fade-up mx-auto mb-14 max-w-[720px] text-center">
-                <div className="mb-[22px] inline-flex items-center gap-2 rounded-full bg-accent-gold-soft px-4 py-1.5 text-[12.5px] font-bold tracking-[0.08em] text-accent-gold-text uppercase">
-                    <span className="animate-pulse-soft">✦</span> Palavra viva,
-                    todos os dias
+            <div className="animate-fade-up mx-auto mb-16 max-w-[760px] text-center">
+                {/* Etiqueta sem pílula preenchida: dois filetes e caixa alta
+                    com tracking largo pesam muito menos na página. */}
+                <div className="mb-8 flex items-center justify-center gap-3">
+                    <span className="h-px w-8 bg-accent-gold/50" />
+                    <span className="type-eyebrow text-accent-gold-text">
+                        Palavra viva, todos os dias
+                    </span>
+                    <span className="h-px w-8 bg-accent-gold/50" />
                 </div>
 
-                <h1 className="mb-[18px] font-display text-[clamp(38px,6vw,68px)] leading-[1.05] font-semibold text-text">
+                <h1 className="type-display mb-7 text-[clamp(44px,7vw,80px)] text-text">
                     A Sagrada Escritura,
                     <br />
-                    iluminada para você.
+                    <em className="font-normal italic">iluminada para você.</em>
                 </h1>
 
-                <p className="mx-auto mb-[30px] max-w-[520px] text-[16.5px] leading-[1.6] text-text-muted">
+                <p className="mx-auto mb-10 max-w-[460px] text-[16px] leading-[1.7] text-text-muted">
                     Leia, medite e aprofunde-se na Bíblia Católica com uma
                     experiência serena, bonita e guiada por comentários.
                 </p>
 
-                <div className="flex flex-wrap justify-center gap-3.5">
-                    <Link
-                        href={heroHref}
-                        className="bg-gold-rose-gradient rounded-[14px] px-7 py-3.5 text-[15px] font-extrabold text-white shadow-[0_10px_30px_var(--accent-gold-soft)] transition-transform [text-shadow:0_1px_2px_rgba(0,0,0,0.25)] hover:scale-[1.02]"
-                    >
-                        Continuar leitura →
+                <div className="flex flex-wrap justify-center gap-3">
+                    <Link href={heroHref} className="btn btn-ink">
+                        Continuar leitura
                     </Link>
-                    <Link
-                        href={bible.plans.index()}
-                        className="rounded-[14px] border border-surface-border bg-surface px-7 py-3.5 text-[15px] font-bold text-text backdrop-blur-[10px]"
-                    >
+                    <Link href={bible.plans.index()} className="btn btn-quiet">
                         Ver planos de leitura
                     </Link>
                 </div>
             </div>
 
             {activePosition && (
-                <div className="mb-14 flex flex-wrap items-center gap-[18px] rounded-[20px] border border-surface-border bg-surface p-[22px_26px] shadow-[0_20px_50px_rgba(0,0,0,0.1)] backdrop-blur-[16px]">
-                    <div
-                        className="flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-[14px]"
-                        style={{
-                            background: `conic-gradient(var(--accent-gold) ${progressPct}%, var(--surface-border) 0)`,
-                        }}
-                    >
-                        <div className="bg-page-solid flex h-[42px] w-[42px] items-center justify-center rounded-[11px] font-display text-[13px] font-bold text-accent-gold-text">
+                <div className="mb-16 flex flex-wrap items-center gap-6 border-y border-rule py-6">
+                    {/* Anel de progresso fino em vez do disco cônico grosso. */}
+                    <div className="relative flex h-12 w-12 shrink-0 items-center justify-center">
+                        <svg
+                            viewBox="0 0 36 36"
+                            className="h-12 w-12 -rotate-90"
+                        >
+                            <circle
+                                cx="18"
+                                cy="18"
+                                r="16"
+                                fill="none"
+                                stroke="var(--rule)"
+                                strokeWidth="1.5"
+                            />
+                            <circle
+                                cx="18"
+                                cy="18"
+                                r="16"
+                                fill="none"
+                                stroke="var(--accent-gold)"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeDasharray={`${(progressPct / 100) * 100.53} 100.53`}
+                            />
+                        </svg>
+                        <span className="tabular absolute text-[10.5px] font-semibold text-text-muted">
                             {progressPct}%
-                        </div>
+                        </span>
                     </div>
                     <div className="min-w-[180px] flex-1">
-                        <div className="mb-[3px] text-xs font-bold tracking-[0.06em] text-accent-gold-text uppercase">
+                        <div className="type-eyebrow mb-1.5 text-text-faint">
                             Continuar em
                         </div>
-                        <div className="font-display text-[22px] font-semibold text-text">
+                        <div className="font-display text-[24px] leading-none font-medium tracking-[-0.01em] text-text">
                             {activePosition.bookName}, capítulo{' '}
                             {activePosition.chapterNumber}
                         </div>
                     </div>
                     <Link
                         href={heroHref}
-                        className="rounded-[11px] bg-accent-gold-soft px-5 py-[11px] text-[13.5px] font-bold whitespace-nowrap text-text"
+                        className="text-sm font-medium whitespace-nowrap text-accent-gold-text underline-offset-4 hover:underline"
                     >
-                        Retomar
+                        Retomar →
                     </Link>
                 </div>
             )}
 
-            <div className="mb-6 flex gap-2.5">
+            {/* Abas com filete embaixo, não pílulas preenchidas. */}
+            <div className="mb-10 flex gap-8 border-b border-rule">
                 {TESTAMENT_ORDER.filter((t) => books[t]).map((t) => (
                     <button
                         key={t}
                         type="button"
                         onClick={() => setTestament(t)}
+                        aria-pressed={testament === t}
                         className={cn(
-                            'rounded-xl px-5 py-2.5 text-sm font-extrabold transition-colors',
+                            'relative -mb-px pb-3.5 text-[14.5px] font-medium transition-colors',
                             testament === t
-                                ? 'bg-accent-gold-soft text-accent-gold-text'
+                                ? 'text-text'
                                 : 'text-text-muted hover:text-text',
                         )}
                     >
                         {TESTAMENT_LABELS[t]}
+                        {testament === t && (
+                            <span className="absolute bottom-0 left-0 h-px w-full bg-accent-gold" />
+                        )}
                     </button>
                 ))}
             </div>

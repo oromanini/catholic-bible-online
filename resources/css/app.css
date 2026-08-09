@@ -18,14 +18,31 @@
     --color-reading-fg: var(--reading-fg);
     --color-reading-muted: var(--reading-muted);
 
+    --color-page: var(--bg-page-solid);
     --color-surface: var(--surface);
+    --color-surface-raised: var(--surface-raised);
     --color-surface-border: var(--surface-border);
+    --color-rule: var(--rule);
     --color-text: var(--text);
     --color-text-muted: var(--text-muted);
+    --color-text-faint: var(--text-faint);
     --color-accent-gold: var(--accent-gold);
     --color-accent-gold-text: var(--accent-gold-text);
     --color-accent-gold-soft: var(--accent-gold-soft);
-    --color-accent-rose: var(--accent-rose);
+    --color-accent-gold-ink: var(--accent-gold-ink);
+
+    /* Escala de raio semântica — três degraus, sem números avulsos. */
+    --radius-tile: 0.5rem;
+    --radius-card: 0.875rem;
+    --radius-panel: 1.25rem;
+
+    /* Sombras tingidas com a cor do fundo, nunca preto puro. */
+    --shadow-soft:
+        0 1px 2px var(--shadow-near), 0 8px 24px -14px var(--shadow-far);
+    --shadow-lift:
+        0 2px 6px var(--shadow-near), 0 20px 44px -22px var(--shadow-far);
+    --shadow-panel:
+        0 1px 0 var(--edge-light) inset, 0 30px 70px -34px var(--shadow-far);
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -146,63 +163,108 @@
     --sidebar-ring: oklch(0.439 0 0);
 }
 
+/*
+ * Paleta: tinta quente + um único ouro envelhecido.
+ * Sem roxo, sem rosa, sem gradiente de duas cores — a hierarquia vem do
+ * contraste de escala e do uso escasso do ouro, não de saturação.
+ */
 [data-reading-theme='light'] {
-    --reading-bg: oklch(0.995 0.002 90);
-    --reading-fg: oklch(0.2 0.01 60);
-    --reading-muted: oklch(0.5 0.01 60);
+    --reading-bg: #fffdf9;
+    --reading-fg: #1c1814;
+    --reading-muted: rgba(28, 24, 20, 0.56);
 
-    --bg-page: linear-gradient(180deg, #faf5ec 0%, #f3ecdf 100%);
-    --bg-page-solid: #faf5ec;
-    --surface: rgba(255, 255, 255, 0.65);
-    --surface-border: rgba(36, 26, 61, 0.09);
-    --text: #241a3d;
-    --text-muted: rgba(36, 26, 61, 0.6);
-    --accent-gold: #f0c879;
-    --accent-gold-text: #a8792e;
-    --accent-gold-soft: rgba(184, 135, 58, 0.14);
-    --accent-rose: #e07a93;
-    --orb-violet: #c9a6ff;
-    --nav-bg: rgba(255, 255, 255, 0.6);
+    --bg-page: #f7f4ee;
+    --bg-page-solid: #f7f4ee;
+    --page-glow: rgba(160, 124, 34, 0.07);
+    --grain-opacity: 0.035;
+
+    --surface: rgba(255, 253, 249, 0.72);
+    --surface-raised: #fffdf9;
+    --surface-border: rgba(38, 32, 24, 0.12);
+    --rule: rgba(38, 32, 24, 0.09);
+    --edge-light: rgba(255, 255, 255, 0.6);
+
+    --text: #1c1814;
+    --text-muted: rgba(28, 24, 20, 0.58);
+    --text-faint: rgba(28, 24, 20, 0.38);
+
+    --accent-gold: #a07c22;
+    --accent-gold-text: #85661a;
+    --accent-gold-soft: rgba(160, 124, 34, 0.1);
+    --accent-gold-ink: #fffdf9;
+
+    --shadow-near: rgba(38, 32, 24, 0.05);
+    --shadow-far: rgba(38, 32, 24, 0.3);
+
+    --nav-bg: rgba(247, 244, 238, 0.82);
 }
 
 [data-reading-theme='sepia'] {
-    --reading-bg: oklch(0.93 0.03 85);
-    --reading-fg: oklch(0.32 0.045 60);
-    --reading-muted: oklch(0.5 0.04 60);
+    --reading-bg: #f8f1e0;
+    --reading-fg: #33291c;
+    --reading-muted: rgba(51, 41, 28, 0.58);
 
-    --bg-page: linear-gradient(180deg, #f6ecd6 0%, #ecdcb8 100%);
-    --bg-page-solid: #f6ecd6;
-    --surface: rgba(255, 250, 240, 0.6);
-    --surface-border: rgba(74, 52, 35, 0.14);
-    --text: #3a2a18;
-    --text-muted: rgba(58, 42, 24, 0.62);
-    --accent-gold: #f0c879;
-    --accent-gold-text: #8a5a1e;
-    --accent-gold-soft: rgba(138, 90, 30, 0.16);
-    --accent-rose: #e07a93;
-    --orb-violet: #c9a6ff;
-    --nav-bg: rgba(246, 236, 214, 0.65);
+    --bg-page: #efe6d2;
+    --bg-page-solid: #efe6d2;
+    --page-glow: rgba(125, 92, 21, 0.08);
+    --grain-opacity: 0.05;
+
+    --surface: rgba(250, 244, 231, 0.7);
+    --surface-raised: #f8f1e0;
+    --surface-border: rgba(66, 50, 28, 0.14);
+    --rule: rgba(66, 50, 28, 0.11);
+    --edge-light: rgba(255, 252, 242, 0.5);
+
+    --text: #33291c;
+    --text-muted: rgba(51, 41, 28, 0.6);
+    --text-faint: rgba(51, 41, 28, 0.4);
+
+    --accent-gold: #8a6714;
+    --accent-gold-text: #745611;
+    --accent-gold-soft: rgba(138, 103, 20, 0.11);
+    --accent-gold-ink: #f8f1e0;
+
+    --shadow-near: rgba(66, 50, 28, 0.06);
+    --shadow-far: rgba(66, 50, 28, 0.32);
+
+    --nav-bg: rgba(239, 230, 210, 0.82);
 }
 
 [data-reading-theme='dark'] {
-    --reading-bg: oklch(0.19 0.005 60);
-    --reading-fg: oklch(0.92 0.005 90);
-    --reading-muted: oklch(0.65 0.01 90);
+    --reading-bg: #16130f;
+    --reading-fg: #ece5d8;
+    --reading-muted: rgba(236, 229, 216, 0.58);
 
-    --bg-page: linear-gradient(180deg, #150c2b 0%, #1c1140 60%, #170f30 100%);
-    --bg-page-solid: #1c1140;
-    --surface: rgba(255, 255, 255, 0.055);
-    --surface-border: rgba(255, 255, 255, 0.1);
-    --text: #f3ecff;
-    --text-muted: rgba(243, 236, 255, 0.6);
-    --accent-gold: #f0c879;
-    --accent-gold-text: #f0c879;
-    --accent-gold-soft: rgba(240, 200, 121, 0.16);
-    --accent-rose: #e07a93;
-    --orb-violet: #6a4bd8;
-    --nav-bg: rgba(21, 12, 43, 0.55);
+    --bg-page: #0d0c0a;
+    --bg-page-solid: #0d0c0a;
+    --page-glow: rgba(201, 163, 76, 0.1);
+    --grain-opacity: 0.055;
+
+    --surface: rgba(255, 249, 236, 0.035);
+    --surface-raised: #16130f;
+    --surface-border: rgba(255, 246, 230, 0.11);
+    --rule: rgba(255, 246, 230, 0.08);
+    --edge-light: rgba(255, 246, 230, 0.05);
+
+    --text: #f0eae0;
+    --text-muted: rgba(240, 234, 224, 0.56);
+    --text-faint: rgba(240, 234, 224, 0.34);
+
+    --accent-gold: #c9a34c;
+    --accent-gold-text: #d8b76b;
+    --accent-gold-soft: rgba(201, 163, 76, 0.14);
+    --accent-gold-ink: #17130c;
+
+    --shadow-near: rgba(0, 0, 0, 0.5);
+    --shadow-far: rgba(0, 0, 0, 0.75);
+
+    --nav-bg: rgba(13, 12, 10, 0.72);
 }
 
+/*
+ * Cormorant Garamond é uma serifa de alto contraste: brilha em corpo grande e
+ * peso leve. Usar 600 como antes engrossava a haste e matava a elegância.
+ */
 :root,
 [data-typeface='serif'] {
     --display-font: 'Cormorant Garamond', ui-serif, Georgia, serif;
@@ -231,10 +293,14 @@
     .text-text,
     .text-text-muted {
         transition:
-            background 0.5s ease,
-            background-color 0.3s ease,
-            color 0.3s ease,
-            border-color 0.3s ease;
+            background-color 0.35s ease,
+            color 0.35s ease,
+            border-color 0.35s ease;
+    }
+
+    /* Numerais tabulares em qualquer contagem, para as colunas alinharem. */
+    .tabular {
+        font-variant-numeric: tabular-nums;
     }
 }
 
@@ -266,21 +332,7 @@
     }
 
     .animate-fade-up {
-        animation: fade-up 0.45s ease-out;
-    }
-
-    @keyframes pulse-soft {
-        0%,
-        100% {
-            opacity: 0.55;
-        }
-        50% {
-            opacity: 1;
-        }
-    }
-
-    .animate-pulse-soft {
-        animation: pulse-soft 2s ease-in-out infinite;
+        animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     @keyframes spin-glow {
@@ -307,62 +359,86 @@
         animation: shimmer 1.4s linear infinite;
     }
 
-    @keyframes float-a {
-        0%,
-        100% {
-            transform: translate(0, 0) scale(1);
-        }
-        50% {
-            transform: translate(30px, -40px) scale(1.08);
-        }
-    }
-
-    @keyframes float-b {
-        0%,
-        100% {
-            transform: translate(0, 0) scale(1);
-        }
-        50% {
-            transform: translate(-40px, 30px) scale(0.95);
-        }
-    }
-
-    @keyframes float-c {
-        0%,
-        100% {
-            transform: translate(0, 0);
-        }
-        50% {
-            transform: translate(20px, 20px);
-        }
-    }
-
-    .animate-float-a {
-        animation: float-a 9s ease-in-out infinite;
-    }
-
-    .animate-float-b {
-        animation: float-b 11s ease-in-out infinite;
-    }
-
-    .animate-float-c {
-        animation: float-c 13s ease-in-out infinite;
-    }
-
     .bg-page {
-        background: var(--bg-page);
+        background-color: var(--bg-page);
     }
 
     .bg-page-solid {
-        background: var(--bg-page-solid);
+        background-color: var(--bg-page-solid);
     }
 
-    .bg-gold-rose-gradient {
+    /* Display serifado: corpo grande pede entrelinha e tracking negativos. */
+    .type-display {
+        font-family: var(--display-font);
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        line-height: 1.04;
+    }
+
+    /* Etiqueta de seção: caixa alta, tracking largo, peso baixo. */
+    .type-eyebrow {
+        font-size: 0.6875rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+    }
+
+    /*
+     * Botões: tinta sólida sobre papel, sem gradiente e sem text-shadow.
+     * O contraste é máximo nos três temas porque as duas cores são o próprio
+     * texto e o próprio fundo da página.
+     */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        border-radius: var(--radius-card);
+        font-size: 0.9375rem;
+        font-weight: 600;
+        line-height: 1;
+        padding: 0.875rem 1.625rem;
+        transition:
+            background-color 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease,
+            opacity 0.2s ease;
+    }
+
+    .btn-ink {
+        background-color: var(--text);
+        color: var(--bg-page-solid);
+    }
+
+    .btn-ink:hover {
+        opacity: 0.86;
+    }
+
+    .btn-quiet {
+        border: 1px solid var(--surface-border);
+        color: var(--text);
+    }
+
+    .btn-quiet:hover {
+        border-color: var(--accent-gold);
+        color: var(--accent-gold-text);
+    }
+
+    /* Filete dourado que se desenha da esquerda no hover. */
+    .rule-gold {
         background: linear-gradient(
             90deg,
-            var(--accent-gold) 0%,
-            var(--accent-gold) 60%,
-            var(--accent-rose) 100%
+            var(--accent-gold),
+            color-mix(in oklab, var(--accent-gold) 25%, transparent)
         );
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-fade-in,
+    .animate-fade-up,
+    .animate-spin-glow,
+    .animate-shimmer {
+        animation: none;
     }
 }

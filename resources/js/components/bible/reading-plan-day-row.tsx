@@ -51,14 +51,13 @@ export default function ReadingPlanDayRow({
     }
 
     return (
-        <div
-            className={cn(
-                'flex items-center gap-3 rounded-[14px] border px-4 py-3 transition-colors',
-                completed
-                    ? 'border-surface-border/60 bg-surface'
-                    : 'border-surface-border',
-            )}
-        >
+        /* Linhas separadas por filete, com o número do dia como numeral
+           tabular à esquerda — uma agenda, não uma pilha de caixas. */
+        <div className="flex items-center gap-4 border-b border-rule py-3.5">
+            <span className="tabular w-7 shrink-0 text-[12px] text-text-faint">
+                {String(day.dayNumber).padStart(2, '0')}
+            </span>
+
             {canTrackProgress && (
                 <button
                     type="button"
@@ -70,39 +69,36 @@ export default function ReadingPlanDayRow({
                             : `Marcar dia ${day.dayNumber} como concluído`
                     }
                     className={cn(
-                        'flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all active:scale-90',
+                        'flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border transition-colors',
                         completed
-                            ? 'border-accent-gold bg-accent-gold text-[#1a1230]'
-                            : 'border-surface-border text-transparent',
+                            ? 'border-accent-gold bg-accent-gold text-[var(--accent-gold-ink)]'
+                            : 'border-surface-border text-transparent hover:border-accent-gold',
                     )}
                 >
                     <Check
                         className={cn(
-                            'h-3.5 w-3.5 transition-transform duration-150',
+                            'h-2.5 w-2.5 transition-transform duration-150',
                             completed ? 'scale-100' : 'scale-0',
                         )}
                     />
                 </button>
             )}
 
-            <div>
-                <p className="text-xs text-text-muted">Dia {day.dayNumber}</p>
-                {first && (
-                    <Link
-                        href={bible.read({
-                            version: versionCode,
-                            book: first.bookSlug,
-                            chapter: first.chapterStart,
-                        })}
-                        className={cn(
-                            'text-sm text-text transition-colors hover:underline',
-                            completed && 'text-text-muted line-through',
-                        )}
-                    >
-                        {label}
-                    </Link>
-                )}
-            </div>
+            {first && (
+                <Link
+                    href={bible.read({
+                        version: versionCode,
+                        book: first.bookSlug,
+                        chapter: first.chapterStart,
+                    })}
+                    className={cn(
+                        'text-[14.5px] transition-colors hover:text-accent-gold-text',
+                        completed ? 'text-text-faint' : 'text-text',
+                    )}
+                >
+                    {label}
+                </Link>
+            )}
         </div>
     );
 }

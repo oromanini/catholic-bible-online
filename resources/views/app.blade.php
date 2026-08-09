@@ -19,6 +19,29 @@
             })();
         </script>
 
+        {{-- Aplica tema de leitura e tipografia antes da primeira pintura,
+             senão quem lê no escuro leva um flash branco a cada navegação. --}}
+        <script>
+            (function() {
+                try {
+                    const theme = localStorage.getItem('reading-theme');
+                    const typeface = localStorage.getItem('typeface');
+
+                    document.documentElement.setAttribute(
+                        'data-reading-theme',
+                        ['light', 'sepia', 'dark'].includes(theme) ? theme : 'light'
+                    );
+                    document.documentElement.setAttribute(
+                        'data-typeface',
+                        ['serif', 'sans'].includes(typeface) ? typeface : 'serif'
+                    );
+                } catch (e) {
+                    document.documentElement.setAttribute('data-reading-theme', 'light');
+                    document.documentElement.setAttribute('data-typeface', 'serif');
+                }
+            })();
+        </script>
+
         {{-- Inline style to set the HTML background color based on our theme in app.css --}}
         <style>
             html {
@@ -28,6 +51,10 @@
             html.dark {
                 background-color: oklch(0.145 0 0);
             }
+
+            html[data-reading-theme='light'] { background-color: #f7f4ee; }
+            html[data-reading-theme='sepia'] { background-color: #efe6d2; }
+            html[data-reading-theme='dark'] { background-color: #0d0c0a; }
         </style>
 
         <link rel="icon" href="/favicon.ico" sizes="any">

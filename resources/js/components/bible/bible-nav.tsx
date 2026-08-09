@@ -45,19 +45,25 @@ export default function BibleNav({ versionCode }: Props) {
     const items = useBibleNavItems(versionCode);
 
     return (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-7">
             {items.map(({ label, href, active }) => (
                 <Link
                     key={label}
                     href={href}
+                    aria-current={active ? 'page' : undefined}
                     className={cn(
-                        'rounded-full px-4 py-2 text-[13.5px] font-bold whitespace-nowrap transition-all',
+                        'relative py-1 text-[14px] font-medium whitespace-nowrap transition-colors',
                         active
-                            ? 'bg-gold-rose-gradient text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.25)]'
+                            ? 'text-text'
                             : 'text-text-muted hover:text-text',
                     )}
                 >
                     {label}
+                    {/* Um filete dourado marca a página atual melhor que uma
+                        pílula com gradiente — não compete com o conteúdo. */}
+                    {active && (
+                        <span className="absolute -bottom-px left-0 h-px w-full bg-accent-gold" />
+                    )}
                 </Link>
             ))}
         </div>
