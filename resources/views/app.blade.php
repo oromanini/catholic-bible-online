@@ -33,11 +33,11 @@
                     );
                     document.documentElement.setAttribute(
                         'data-typeface',
-                        ['serif', 'sans'].includes(typeface) ? typeface : 'serif'
+                        ['serif', 'sans'].includes(typeface) ? typeface : 'sans'
                     );
                 } catch (e) {
                     document.documentElement.setAttribute('data-reading-theme', 'light');
-                    document.documentElement.setAttribute('data-typeface', 'serif');
+                    document.documentElement.setAttribute('data-typeface', 'sans');
                 }
             })();
         </script>

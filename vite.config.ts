@@ -20,17 +20,14 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.tsx'],
             refresh: true,
             fonts: [
-                bunny('Manrope', {
+                // Família única do produto: UI, títulos e texto do capítulo.
+                bunny('Instrument Sans', {
                     weights: [400, 500, 600, 700],
+                    styles: ['normal', 'italic'],
                 }),
+                // Só para quem alterna a leitura para serifada no botão Aa.
                 bunny('Literata', {
                     weights: [400, 500, 600],
-                }),
-                // 400/500 são os pesos que dão elegância a esta serifa de alto
-                // contraste em corpo grande; 600 fica só para casos pequenos.
-                bunny('Cormorant Garamond', {
-                    weights: [400, 500, 600],
-                    styles: ['normal', 'italic'],
                 }),
             ],
         }),

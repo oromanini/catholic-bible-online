@@ -135,10 +135,14 @@ export default function BookIndex({ version, books, serverPosition }: Props) {
                     <span className="h-px w-8 bg-accent-gold/50" />
                 </div>
 
+                {/* Sem serifa, o contraste da segunda linha vem do tom, não
+                    do itálico: mesma escala, cor recuada. */}
                 <h1 className="type-display mb-7 text-[clamp(44px,7vw,80px)] text-text">
                     A Sagrada Escritura,
                     <br />
-                    <em className="font-normal italic">iluminada para você.</em>
+                    <span className="text-text-muted">
+                        iluminada para você.
+                    </span>
                 </h1>
 
                 <p className="mx-auto mb-10 max-w-[460px] text-[16px] leading-[1.7] text-text-muted">

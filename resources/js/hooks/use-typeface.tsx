@@ -3,7 +3,7 @@ import { useSyncExternalStore } from 'react';
 export type Typeface = 'serif' | 'sans';
 
 const STORAGE_KEY = 'typeface';
-const DEFAULT_TYPEFACE: Typeface = 'serif';
+const DEFAULT_TYPEFACE: Typeface = 'sans';
 
 const listeners = new Set<() => void>();
 let currentTypeface: Typeface = DEFAULT_TYPEFACE;

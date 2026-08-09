@@ -18,12 +18,14 @@ export default function TypefaceToggle({
                     : 'Alternar para fonte serifada'
             }
             className={cn(
-                'flex h-9 w-9 shrink-0 items-center justify-center rounded-tile font-display text-[13px] font-medium text-text-muted transition-colors hover:bg-accent-gold-soft hover:text-accent-gold-text',
+                'flex h-9 w-9 shrink-0 items-center justify-center rounded-tile font-serif text-[14px] font-medium text-text-muted transition-colors hover:bg-accent-gold-soft hover:text-accent-gold-text',
                 className,
             )}
             {...props}
         >
-            {typeface === 'serif' ? 'Aa' : 'Sans'}
+            {/* "Aa" desenhado na própria fonte de leitura ativa: o botão
+                mostra o estado sem precisar de rótulo. */}
+            Aa
         </button>
     );
 }

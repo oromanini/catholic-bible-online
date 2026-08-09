@@ -9,8 +9,9 @@
 
 @theme {
     --font-sans:
-        'Manrope', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
     --font-serif: var(--reading-serif-font);
     --font-display: var(--display-font);
 
@@ -262,18 +263,23 @@
 }
 
 /*
- * Cormorant Garamond é uma serifa de alto contraste: brilha em corpo grande e
- * peso leve. Usar 600 como antes engrossava a haste e matava a elegância.
+ * Uma família só em todo o produto. Instrument Sans é uma grotesca editorial:
+ * aberturas fechadas e um pouco estreita, então aguenta corpo gigante no
+ * título sem virar "Inter de dashboard", e tem altura de x generosa para o
+ * texto corrido do capítulo.
+ *
+ * O display nunca é serifado. A serifa fica só como opção de leitura, para
+ * quem preferir — o botão Aa no cabeçalho alterna apenas o texto do capítulo.
  */
 :root,
-[data-typeface='serif'] {
-    --display-font: 'Cormorant Garamond', ui-serif, Georgia, serif;
-    --reading-serif-font: 'Literata', ui-serif, Georgia, serif;
-}
-
 [data-typeface='sans'] {
     --display-font: var(--font-sans);
     --reading-serif-font: var(--font-sans);
+}
+
+[data-typeface='serif'] {
+    --display-font: var(--font-sans);
+    --reading-serif-font: 'Literata', ui-serif, Georgia, serif;
 }
 
 @layer base {
@@ -367,12 +373,16 @@
         background-color: var(--bg-page-solid);
     }
 
-    /* Display serifado: corpo grande pede entrelinha e tracking negativos. */
+    /*
+     * Grotesca em corpo gigante pede o contrário da serifa: mais peso (em 400
+     * a haste fica anêmica) e tracking bem mais fechado, senão as palavras
+     * parecem soltas umas das outras.
+     */
     .type-display {
         font-family: var(--display-font);
-        font-weight: 400;
-        letter-spacing: -0.02em;
-        line-height: 1.04;
+        font-weight: 600;
+        letter-spacing: -0.035em;
+        line-height: 1.02;
     }
 
     /* Etiqueta de seção: caixa alta, tracking largo, peso baixo. */
