@@ -1,0 +1,54 @@
+FROM php:8.4-cli-alpine
+
+RUN apk add --no-cache \
+        git \
+        unzip \
+        libpng-dev \
+        libzip-dev \
+        oniguruma-dev \
+        nodejs \
+        npm \
+        $PHPIZE_DEPS \
+    && docker-php-ext-install pdo_mysql bcmath zip \
+    && pecl install redis \
+    && docker-php-ext-enable redis \
+    && apk del $PHPIZE_DEPS
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/html
+
+COPY . .
+
+RUN mkdir -p storage/framework/cache/data \
+    storage/framework/sessions \
+    storage/framework/testing \
+    storage/framework/views \
+    storage/logs \
+    storage/app/private \
+    storage/app/public \
+    bootstrap/cache
+
+RUN composer install --no-interaction --no-dev --prefer-dist --no-progress --optimize-autoloader
+
+RUN cp .env.example .env \
+    && sed -i 's/^SESSION_DRIVER=.*/SESSION_DRIVER=file/' .env \
+    && sed -i 's/^CACHE_STORE=.*/CACHE_STORE=file/' .env \
+    && php artisan key:generate --no-interaction --force
+
+RUN npm ci
+
+RUN php artisan wayfinder:generate --with-form -v
+
+RUN npm run build && rm -rf node_modules
+
+RUN rm -f .env
+
+RUN chmod -R 775 storage bootstrap/cache
+
+COPY docker/php/entrypoint.prod.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+EXPOSE 8000
+
+CMD ["/usr/local/bin/entrypoint.sh"]
