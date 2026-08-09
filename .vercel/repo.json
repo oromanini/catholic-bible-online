@@ -1,0 +1,11 @@
+{
+  "remoteName": "origin",
+  "projects": [
+    {
+      "id": "prj_2dUQzponChXnkdYbAe5oaaJSYBRX",
+      "name": "catholic-bible-online",
+      "directory": ".",
+      "orgId": "team_oov1NgFxN8OCMFe6KV3cqXO2"
+    }
+  ]
+}
