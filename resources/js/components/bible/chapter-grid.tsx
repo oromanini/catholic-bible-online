@@ -20,14 +20,15 @@ export default function ChapterGrid({
     const chapters = Array.from({ length: chapterCount }, (_, i) => i + 1);
 
     return (
-        <details
-            open
-            className="rounded-[18px] border border-surface-border bg-surface p-5 backdrop-blur-[14px]"
-        >
-            <summary className="cursor-pointer text-xs font-extrabold tracking-[0.06em] text-text-muted uppercase marker:content-none">
-                Capítulos — {bookName}
+        <details open className="group">
+            <summary className="type-eyebrow mb-4 flex cursor-pointer items-center gap-3 text-text-faint marker:content-none">
+                <span className="shrink-0">Capítulos</span>
+                <span className="h-px flex-1 bg-rule" />
             </summary>
-            <div className="mt-3.5 grid grid-cols-8 gap-[7px] sm:grid-cols-10 lg:grid-cols-5">
+            <p className="mb-4 font-display text-[17px] leading-tight font-medium text-text-muted">
+                {bookName}
+            </p>
+            <div className="grid grid-cols-8 gap-1 sm:grid-cols-10 lg:grid-cols-5">
                 {chapters.map((number) => (
                     <Link
                         key={number}
@@ -40,10 +41,10 @@ export default function ChapterGrid({
                             number === currentChapter ? 'page' : undefined
                         }
                         className={cn(
-                            'flex h-[34px] items-center justify-center rounded-[9px] text-[13px] font-bold transition-all active:scale-90',
+                            'tabular flex h-8 items-center justify-center rounded-tile text-[12.5px] transition-colors',
                             number === currentChapter
-                                ? 'bg-accent-gold text-[#1a1230]'
-                                : 'text-text-muted hover:bg-accent-gold-soft hover:text-text',
+                                ? 'bg-accent-gold font-semibold text-[var(--accent-gold-ink)]'
+                                : 'text-text-muted hover:bg-accent-gold-soft hover:text-accent-gold-text',
                         )}
                     >
                         {number}

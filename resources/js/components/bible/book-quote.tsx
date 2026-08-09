@@ -61,9 +61,11 @@ export default function BookQuote({ bookSlug }: Props) {
     }
 
     return (
-        <div className="mb-8 rounded-[20px] border border-surface-border bg-surface p-6 backdrop-blur-[14px]">
-            <div className="mb-3.5 flex items-center gap-2 text-[13px] font-extrabold tracking-[0.05em] text-accent-gold-text uppercase">
-                <Quote className="h-4 w-4" aria-hidden />
+        /* Painel definido por um filete dourado à esquerda, no lugar de uma
+           caixa fechada com borda em volta — a citação respira na página. */
+        <div className="mb-10 border-l-2 border-accent-gold/40 pl-6">
+            <div className="type-eyebrow mb-4 flex items-center gap-2 text-accent-gold-text">
+                <Quote className="h-3.5 w-3.5" aria-hidden />
                 Padres da Igreja
             </div>
 
@@ -71,7 +73,7 @@ export default function BookQuote({ bookSlug }: Props) {
                 <button
                     type="button"
                     onClick={search}
-                    className="rounded-xl border border-surface-border px-4 py-2 text-sm font-bold text-text transition-all hover:bg-accent-gold-soft active:scale-95"
+                    className="btn btn-quiet px-4 py-2.5 text-[13.5px]"
                 >
                     Buscar citação sobre este livro
                 </button>
@@ -107,10 +109,10 @@ export default function BookQuote({ bookSlug }: Props) {
 
             {status === 'ready' && quote && (
                 <div className="animate-fade-up">
-                    <blockquote className="font-serif text-text italic">
+                    <blockquote className="font-display text-[22px] leading-[1.45] font-normal text-text italic">
                         “{quote.quoteTranslated ?? quote.quoteOriginal}”
                     </blockquote>
-                    <p className="mt-2 text-sm text-text-muted">
+                    <p className="mt-3 text-[13px] text-text-muted">
                         — {quote.author}
                         {quote.workTitle ? `, ${quote.workTitle}` : ''}
                     </p>

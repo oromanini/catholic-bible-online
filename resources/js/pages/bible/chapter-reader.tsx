@@ -43,23 +43,30 @@ export default function ChapterReader({
         <>
             <Head title={`${book.name} ${chapter.number} — ${version.name}`} />
 
-            <div className="lg:grid lg:grid-cols-[1fr_260px] lg:items-start lg:gap-10">
-                <div className="max-w-3xl">
+            <div className="lg:grid lg:grid-cols-[1fr_220px] lg:items-start lg:gap-16">
+                <div className="min-w-0">
                     <Link
                         href={bible.books(version.code)}
-                        className="mb-[22px] inline-block text-sm font-bold text-text-muted hover:text-text"
+                        className="mb-10 inline-block text-[13px] font-medium text-text-muted transition-colors hover:text-text"
                     >
                         ← Livros
                     </Link>
 
-                    <div className="bg-gold-rose-gradient mb-2 h-[3px] w-[46px] rounded-full" />
-                    <h1 className="mb-7 font-display text-[40px] font-semibold text-text">
-                        {book.name} {chapter.number}
-                    </h1>
+                    <header className="mb-10">
+                        <div className="type-eyebrow mb-3 text-text-faint">
+                            {version.name}
+                        </div>
+                        <h1 className="type-display text-[clamp(38px,5vw,56px)] text-text">
+                            {book.name}{' '}
+                            <span className="tabular text-accent-gold-text">
+                                {chapter.number}
+                            </span>
+                        </h1>
+                    </header>
 
                     {chapter.number === 1 && <BookQuote bookSlug={book.slug} />}
 
-                    <div className="mb-8">
+                    <div className="mb-10">
                         <ChapterNavigator
                             versionCode={version.code}
                             bookSlug={book.slug}
@@ -69,11 +76,13 @@ export default function ChapterReader({
                         />
                     </div>
 
-                    <div className="rounded-[20px] bg-reading-bg p-9 shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
+                    {/* Superfície de leitura: borda de 1px e sombra rasa, para
+                        sugerir uma folha pousada — não um card flutuando. */}
+                    <div className="rounded-panel border border-rule bg-reading-bg px-6 py-10 shadow-soft sm:px-12 sm:py-14">
                         <VerseList verses={verses} />
                     </div>
 
-                    <div className="mt-7">
+                    <div className="mt-10">
                         <ChapterNavigator
                             versionCode={version.code}
                             bookSlug={book.slug}
@@ -90,7 +99,7 @@ export default function ChapterReader({
                     />
                 </div>
 
-                <div className="mt-10 lg:sticky lg:top-20 lg:mt-0">
+                <div className="mt-14 lg:sticky lg:top-28 lg:mt-0">
                     <ChapterGrid
                         versionCode={version.code}
                         bookSlug={book.slug}

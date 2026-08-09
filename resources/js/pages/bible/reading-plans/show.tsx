@@ -21,30 +21,30 @@ export default function ReadingPlanShow({ version, plan, days }: Props) {
         <div className="animate-fade-up mx-auto max-w-[800px]">
             <Head title={plan.name} />
 
-            <div className="mb-8 text-center">
-                <p className="text-sm text-text-muted">Plano de leitura</p>
-                <h1 className="mt-1 font-display text-[38px] font-semibold text-text">
+            <div className="mb-14 text-center">
+                <p className="type-eyebrow text-text-faint">Plano de leitura</p>
+                <h1 className="type-display mt-4 text-[clamp(36px,5vw,52px)] text-text">
                     {plan.name}
                 </h1>
                 {plan.description && (
-                    <p className="mt-2 text-sm text-text-muted">
+                    <p className="mx-auto mt-4 max-w-[440px] text-[15px] leading-[1.7] text-text-muted">
                         {plan.description}
                     </p>
                 )}
 
                 {auth.user ? (
-                    <p className="mt-4 text-sm font-bold text-accent-gold-text">
+                    <p className="tabular mt-6 text-[13px] text-accent-gold-text">
                         {completedCount} de {plan.durationDays} dias concluídos
                     </p>
                 ) : (
-                    <p className="mt-4 text-sm text-text-muted">
+                    <p className="mt-6 text-[13px] text-text-faint">
                         Entre na sua conta para acompanhar seu progresso dia a
                         dia.
                     </p>
                 )}
             </div>
 
-            <div className="space-y-2">
+            <div>
                 {days.map((day) => (
                     <ReadingPlanDayRow
                         key={day.dayNumber}

@@ -20,15 +20,14 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.tsx'],
             refresh: true,
             fonts: [
-                bunny('Manrope', {
-                    weights: [400, 500, 600, 700, 800],
+                // Família única do produto: UI, títulos e texto do capítulo.
+                bunny('Instrument Sans', {
+                    weights: [400, 500, 600, 700],
+                    styles: ['normal', 'italic'],
                 }),
+                // Só para quem alterna a leitura para serifada no botão Aa.
                 bunny('Literata', {
                     weights: [400, 500, 600],
-                }),
-                bunny('Cormorant Garamond', {
-                    weights: [500, 600],
-                    styles: ['normal', 'italic'],
                 }),
             ],
         }),
